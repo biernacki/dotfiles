@@ -73,10 +73,9 @@ install_zsh_plugins() {
 
   if command -v git >/dev/null 2>&1 && command -v zsh >/dev/null 2>&1; then
     for plugin in "zsh-syntax-highlighting" "zsh-history-substring-search" "zsh-autosuggestions"; do
-      git clone -q "https://github.com/zsh-users/$plugin" \
-        if [ ! -d "$ZSH_DIR/$plugin" ]; then
-          "$ZSH_DIR/$plugin" || error_exit "Failed to clone $plugin"
-        fi
+      if [ ! -d "$ZSH_DIR/$plugin" ]; then
+        git clone -q "https://github.com/zsh-users/$plugin" "$ZSH_DIR/$plugin" || error_exit "Failed to clone $plugin"
+      fi
     done
   fi
 }
