@@ -63,7 +63,9 @@ setup_zsh() {
 # Install p10k
 install_p10k() {
   echo "Installing p10k..."
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_DIR/powerlevel10k"
+  if [ ! -d "$ZSH_DIR/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_DIR/powerlevel10k"
+  fi
 }
 
 # Install ZSH plugins
@@ -91,9 +93,9 @@ install_neovim() {
 main() {
   check_sudo
   setup_config_files
-  setup_zsh
   install_zsh_plugins
   install_p10k
+  setup_zsh
   install_neovim
 }
 
